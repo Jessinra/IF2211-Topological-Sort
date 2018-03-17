@@ -39,11 +39,12 @@ namespace IF2211 {
                 Console.WriteLine(element);
             }
 
-
-
-
-
-
+            Dictionary<int,string> bfsResult = new Dictionary<int,string>();
+            bfsResult = bfs(course_dict);
+            foreach(KeyValuePair<int, string> temp in bfsResult){
+                Console.WriteLine("Semester: {0}", temp.Key);
+                Console.WriteLine("Course Taken: {0}", temp.Value);
+            }
 
         }
 
@@ -169,7 +170,57 @@ namespace IF2211 {
             }
 
             return filtered;
-        }   
+        }
+
+        // ---------------------- BFS -------------------------------------
+
+        static bool canTakeCourse (Dictionary <string, Subject> courses){
+            //returns true if there is a course that can be taken
+            foreach(KeyValuePair<string, Subject> entry in courses){
+                Subject subject = entry.Value;
+                if (subject.n_of_preq == 0){
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        static Dictionary<int, string> bfs(Dictionary<string, Subject> courses){
+            Dictionary <int, string> result = new Dictionary<int, string>();
+
+            int i = 1;
+            List<string> takenList = new List<string>();
+            List<string> pointedTo = new List<string>();
+            string taken;
+            while(canTakeCourse(courses)){
+                taken = "";
+                pointedTo.Clear();
+                takenList.Clear();
+                foreach(KeyValuePair<string, Subject> entry in courses){                    
+                    Subject subject = entry.Value;
+                    if (subject.n_of_preq == 0){ //Taking course which have no prequisites
+                        takenList.Add(subject.name); 
+                        foreach(string temp in subject.preq_of){
+                            pointedTo.Add(temp);
+                        }
+                    }
+                }
+                foreach(string tempstring in pointedTo){ //Decrementing n_of_preq of from taken courses
+                    Subject tempsub = courses[tempstring];
+                    tempsub.n_of_preq--;
+                    courses[tempstring]=tempsub;
+                }
+                foreach(string temp in takenList){ //remove taken course and constructing a string for the result Dict
+                    courses.Remove(temp);
+                    taken = taken + temp;
+                }
+
+                result.Add(i, taken);
+                i++;
+            }
+
+            return result;
+        }
     }
 }
 
