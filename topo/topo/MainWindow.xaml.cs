@@ -42,7 +42,7 @@ namespace topo
                 HL03.Visibility = Visibility.Hidden;
                 HL04.Visibility = Visibility.Hidden;
                 HL05.Visibility = Visibility.Hidden;
-                //GleeViewerSample.main();
+                GleeViewerSample.main();
 
 
             }
@@ -150,6 +150,11 @@ namespace topo
             }
 
             list_subject.Visibility = Visibility.Hidden;
+            string filename = GleeViewerSample.filename;
+            CoursePlan coursePlan = new CoursePlan(filename);
+            BFS bfsResult = new BFS(coursePlan.subjects);
+            BFS_plan.Visibility = Visibility.Visible;
+            BFS_plan.Text = bfsResult.get_name_list();
         }
 
         private void module_info_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

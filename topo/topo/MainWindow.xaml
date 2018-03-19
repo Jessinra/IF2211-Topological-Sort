@@ -15,7 +15,7 @@
         <Image x:Name="module_bfs" Margin="7,237,770,119" Source="logo_bfs.png" Stretch="Fill" MouseLeftButtonDown="module_bfs_MouseLeftButtonDown" Width="50" Height="50"/>
         <Image x:Name="module_dfs" Margin="7,167,770,189" Source="logo_dfs.png" Stretch="Fill" MouseLeftButtonDown="module_dfs_MouseLeftButtonDown" Width="50" Height="50"/>
         <Image x:Name="module_info" Margin="7,327,770,29" Source="logo_info.png" Stretch="Fill" MouseLeftButtonDown="module_info_MouseLeftButtonDown" Width="50" Height="50"/>
-        <Label x:Name="page_input" Content="Input" HorizontalAlignment="Left" Height="273" Margin="120,109,0,0" VerticalAlignment="Top" Width="687" Background="#FF0F0F15" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" FontFamily="Bahnschrift Light" Visibility="Hidden">
+        <Label x:Name="page_input" Content="Input" HorizontalAlignment="Left" Height="273" Margin="120,112,0,0" VerticalAlignment="Top" Width="687" Background="#FF0F0F15" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" FontFamily="Bahnschrift Light" Visibility="Hidden">
             <Label.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFF2E4F4" Offset="0"/>
@@ -74,6 +74,7 @@
         <Label x:Name="HL03" Content="" HorizontalAlignment="Left" Height="63" Margin="0,162,0,0" VerticalAlignment="Top" Width="63" Background="#198496D4" Visibility="Hidden"/>
         <Label x:Name="HL04" Content="" HorizontalAlignment="Left" Height="64" Margin="0,230,0,0" VerticalAlignment="Top" Width="63" Background="#198496D4" Visibility="Hidden"/>
         <Label x:Name="HL05" Content="" HorizontalAlignment="Left" Height="63" Margin="0,319,0,0" VerticalAlignment="Top" Width="63" Background="#198496D4" Visibility="Hidden"/>
-        <TextBox x:Name="list_subject" HorizontalAlignment="Left" Height="184" TextWrapping="Wrap" VerticalAlignment="Top" Width="618" Margin="152,193,0,0" HorizontalScrollBarVisibility="Auto" Background="#FF0F0F15" Foreground="#FFEBE1E1" BorderBrush="#00ABADB3" CaretBrush="Black" FontFamily="Bahnschrift Light" FontSize="15" Grid.Column="5" Grid.ColumnSpan="5" ScrollViewer.CanContentScroll="True" Visibility="Hidden"/>
+        <TextBox x:Name="list_subject" HorizontalAlignment="Left" Height="184" TextWrapping="Wrap" VerticalAlignment="Top" Width="618" Margin="152,193,0,0" HorizontalScrollBarVisibility="Auto" Background="#FF0F0F15" Foreground="#FFEBE1E1" BorderBrush="#00ABADB3" CaretBrush="Black" FontFamily="Bahnschrift Light" FontSize="15" Grid.Column="5" Grid.ColumnSpan="5" ScrollViewer.CanContentScroll="True" Visibility="Hidden" VerticalScrollBarVisibility="Visible"/>
+        <TextBox x:Name="BFS_plan" HorizontalAlignment="Left" Height="184" TextWrapping="Wrap" VerticalAlignment="Top" Width="618" Margin="152,193,0,0" HorizontalScrollBarVisibility="Auto" Background="#FF0F0F15" Foreground="#FFEBE1E1" BorderBrush="#00ABADB3" CaretBrush="Black" FontFamily="Bahnschrift Light" FontSize="15" Grid.Column="5" Grid.ColumnSpan="5" ScrollViewer.CanContentScroll="True" Visibility="Hidden" VerticalScrollBarVisibility="Visible"/>
     </Grid>
 </Window>

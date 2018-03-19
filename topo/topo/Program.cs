@@ -38,6 +38,9 @@ namespace topo
                 }
             }
 
+            BFS resultBFS = new BFS(coursePlan.subjects);
+            resultBFS.Print();
+
             //bind the graph to the viewer
             viewer.Graph = graph;
 
@@ -53,30 +56,20 @@ namespace topo
 
 
             // print to console
-            DFS resultDFS = new DFS(coursePlan.subjects);
-            resultDFS.Print();
+            //DFS resultDFS = new DFS(coursePlan.subjects);
+            //resultDFS.Print();
 
-            Console.WriteLine();
+            //Console.WriteLine();
+            //
 
             // print to console
-            BFS resultBFS = new BFS(coursePlan.subjects);
-            resultBFS.Print();
-            
 
-            
+
+
         }
     }
 
-
-
-
-
-
-
-
-
-
-
+    
     public struct Subject
     {
         public string name;
@@ -278,6 +271,7 @@ namespace topo
             result = new Dictionary<int, List<string>>();
 
             int i = 1;
+            int j = 1;
             List<string> pointedTo = new List<string>();
             while (canTakeCourse(courses))
             {
@@ -301,13 +295,26 @@ namespace topo
                     tempsub.n_of_preq--;
                     courses[tempstring] = tempsub;
                 }
+
+                List<string> tempTaken = new List<string>();
+
                 foreach (string temp in takenList)
                 { //remove taken course
                     courses.Remove(temp);
+                    tempTaken.Add(j.ToString() + ". " + temp);
+                    j++;
                 }
 
-                result.Add(i, takenList);
+                result.Add(i, tempTaken);
                 i++;
+            }
+            
+            if(courses.Count > 1)
+            {
+                List<string> x = new List<string>();
+                x.Add("BFS Gagal");
+                result.Clear();
+                result.Add(0, x);
             }
         }
 
@@ -337,6 +344,22 @@ namespace topo
                     Console.WriteLine(element);
                 }
             }
+        }
+
+        public string get_name_list()
+        {
+            string result_ = "Hasil BFS: \n\n";
+            foreach (KeyValuePair<int, List<string>> entry in result)
+            {
+                result_ = result_ + "Semester " + entry.Key.ToString() + ":\n";
+                foreach(string temp in entry.Value)
+                {
+                    result_ = result_ + temp + "\n";
+                }
+                result_ = result_ + "\n";
+            }
+
+            return result_;
         }
     }
 }

@@ -207,6 +207,14 @@ public class BFS{
             result.Add(i, takenList);
             i++;
         }
+
+        if(courses.Count > 1)
+        {
+            List<string> x = new List<string>();
+            x.Add("BFS Gagal");
+            result.Clear();
+            result.Add(0, x);
+        }
     }
 
     bool canTakeCourse (Dictionary <string, Subject> courses){
