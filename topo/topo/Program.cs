@@ -6,8 +6,7 @@ using Microsoft.Glee.Drawing;
 
 namespace topo
 {
-
-    public class GleeViewerSample
+    public class ListSubjectViewer
     {
         public static string filename = "../../../../" + "Daftar Kuliah.txt";
 
@@ -38,9 +37,6 @@ namespace topo
                 }
             }
 
-            BFS resultBFS = new BFS(coursePlan.subjects);
-            resultBFS.Print();
-
             //bind the graph to the viewer
             viewer.Graph = graph;
 
@@ -53,23 +49,67 @@ namespace topo
             //show the form
             form.ShowDialog();
 
-
-
             // print to console
             //DFS resultDFS = new DFS(coursePlan.subjects);
             //resultDFS.Print();
-
-            //Console.WriteLine();
-            //
-
-            // print to console
-
-
-
         }
     }
 
-    
+    public class BFSViewer
+    {
+        public static string filename = "../../../../" + "Daftar Kuliah.txt";
+
+        public static void main()
+        {
+            //create a form
+            System.Windows.Forms.Form form = new System.Windows.Forms.Form();
+
+            //create a viewer object
+            Microsoft.Glee.GraphViewerGdi.GViewer viewer = new Microsoft.Glee.GraphViewerGdi.GViewer();
+
+            //create a graph object
+            Microsoft.Glee.Drawing.Graph graph = new Microsoft.Glee.Drawing.Graph("graph");
+            
+            //create the graph content
+            CoursePlan coursePlan = new CoursePlan(filename);
+            Subject tempSub = new Subject();
+            BFS bfsResult = new BFS(coursePlan.subjects);
+            CoursePlan tempCourse = new CoursePlan(filename);
+            string temp = "1. " + bfsResult.result[1][0];
+            List<string> convert = new List<string>();
+            foreach(KeyValuePair<int, List<string>> entry in bfsResult.result)
+            {
+                foreach(string x in entry.Value)
+                {
+                    convert.Add(x);
+                }
+            }
+
+            for (int i = 0; i < convert.Count-1; i++)
+            {
+                tempSub = tempCourse.subjects[convert[i]];
+                foreach(string x in tempSub.preq_of)
+                {
+                    int index = convert.IndexOf(x) + 1;
+                    graph.AddEdge(((i + 1).ToString() + ". " + convert[i]), (index.ToString() + ". " + x));
+                }
+                graph.AddEdge((i+1).ToString()+ ". " + convert[i], (i+2).ToString() + ". " + convert[i + 1]);
+            }
+
+            //bind the graph to the viewer
+            viewer.Graph = graph;
+
+            //associate the viewer with the form
+            form.SuspendLayout();
+            viewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            form.Controls.Add(viewer);
+            form.ResumeLayout();
+
+            //show the form
+            form.ShowDialog();
+        }
+    }
+
     public struct Subject
     {
         public string name;
@@ -264,14 +304,13 @@ namespace topo
 
     public class BFS
     {
-        Dictionary<int, List<string>> result;
+        public Dictionary<int, List<string>> result;
 
         public BFS(Dictionary<string, Subject> courses)
         {
             result = new Dictionary<int, List<string>>();
 
             int i = 1;
-            int j = 1;
             List<string> pointedTo = new List<string>();
             while (canTakeCourse(courses))
             {
@@ -296,16 +335,12 @@ namespace topo
                     courses[tempstring] = tempsub;
                 }
 
-                List<string> tempTaken = new List<string>();
-
                 foreach (string temp in takenList)
                 { //remove taken course
                     courses.Remove(temp);
-                    tempTaken.Add(j.ToString() + ". " + temp);
-                    j++;
                 }
 
-                result.Add(i, tempTaken);
+                result.Add(i, takenList);
                 i++;
             }
             
@@ -348,13 +383,15 @@ namespace topo
 
         public string get_name_list()
         {
+            int j = 1;
             string result_ = "Hasil BFS: \n\n";
             foreach (KeyValuePair<int, List<string>> entry in result)
             {
                 result_ = result_ + "Semester " + entry.Key.ToString() + ":\n";
                 foreach(string temp in entry.Value)
                 {
-                    result_ = result_ + temp + "\n";
+                    result_ = result_ + j.ToString() + ". " + temp + "\n";
+                    j++;
                 }
                 result_ = result_ + "\n";
             }

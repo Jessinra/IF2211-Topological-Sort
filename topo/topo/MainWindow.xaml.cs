@@ -42,7 +42,7 @@ namespace topo
                 HL03.Visibility = Visibility.Hidden;
                 HL04.Visibility = Visibility.Hidden;
                 HL05.Visibility = Visibility.Hidden;
-                GleeViewerSample.main();
+                ListSubjectViewer.main();
 
 
             }
@@ -55,6 +55,7 @@ namespace topo
             }
 
             list_subject.Visibility = Visibility.Hidden;
+            BFS_plan.Visibility = Visibility.Hidden;
         }
 
         private void module_list_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -75,7 +76,7 @@ namespace topo
                 HL04.Visibility = Visibility.Hidden;
                 HL05.Visibility = Visibility.Hidden;
 
-                string filename = GleeViewerSample.filename;
+                string filename = ListSubjectViewer.filename;
                 CoursePlan coursePlan = new CoursePlan(filename);
                 list_subject.Visibility = Visibility.Visible;
                 list_subject.Text = coursePlan.get_name_list();
@@ -89,7 +90,7 @@ namespace topo
                 HL02.Visibility = Visibility.Hidden;
             }
 
-
+            BFS_plan.Visibility = Visibility.Hidden;
 
         }
 
@@ -120,6 +121,7 @@ namespace topo
             }
 
             list_subject.Visibility = Visibility.Hidden;
+            BFS_plan.Visibility = Visibility.Hidden;
 
         }
 
@@ -150,11 +152,12 @@ namespace topo
             }
 
             list_subject.Visibility = Visibility.Hidden;
-            string filename = GleeViewerSample.filename;
+            string filename = ListSubjectViewer.filename;
             CoursePlan coursePlan = new CoursePlan(filename);
             BFS bfsResult = new BFS(coursePlan.subjects);
             BFS_plan.Visibility = Visibility.Visible;
             BFS_plan.Text = bfsResult.get_name_list();
+            BFSViewer.main();
         }
 
         private void module_info_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -184,6 +187,7 @@ namespace topo
             }
 
             list_subject.Visibility = Visibility.Hidden;
+            BFS_plan.Visibility = Visibility.Hidden;
         }
 
         private void list_subject_LostMouseCapture(object sender, MouseEventArgs e)
