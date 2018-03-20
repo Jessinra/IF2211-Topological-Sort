@@ -59,6 +59,7 @@ namespace topo
             list_subject.Visibility = Visibility.Hidden;
             BFS_plan.Visibility = Visibility.Hidden;
             DFS_plan.Visibility = Visibility.Hidden;
+            Info_box.Visibility = Visibility.Hidden;
         }
 
         private void module_list_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -96,6 +97,7 @@ namespace topo
 
             BFS_plan.Visibility = Visibility.Hidden;
             DFS_plan.Visibility = Visibility.Hidden;
+            Info_box.Visibility = Visibility.Hidden;
 
         }
 
@@ -127,6 +129,7 @@ namespace topo
 
             list_subject.Visibility = Visibility.Hidden;
             BFS_plan.Visibility = Visibility.Hidden;
+            Info_box.Visibility = Visibility.Hidden;
 
 
 
@@ -170,6 +173,7 @@ namespace topo
         
             list_subject.Visibility = Visibility.Hidden;
             DFS_plan.Visibility = Visibility.Hidden;
+            Info_box.Visibility = Visibility.Hidden;
 
             string filename = ListSubjectViewer.filename;
             CoursePlan coursePlan = new CoursePlan(filename);
@@ -196,6 +200,16 @@ namespace topo
                 HL03.Visibility = Visibility.Hidden;
                 HL04.Visibility = Visibility.Hidden;
                 HL05.Visibility = Visibility.Visible;
+
+                Info_box.Text =
+                    "\n\n\n" +
+                    "- Felix Septianus  (135 16 041)\n" +
+                    "- Dicky Adrian     (135 16 050)\n" +
+                    "- Jessin Donnyson  (135 16 050)\n" +
+                    "\n\n" +
+                    "Institut Teknologi Bandung\n" +
+                    "All rights reserved 2018";
+
             }
             else if (page_info.IsVisible)
             {
@@ -208,6 +222,7 @@ namespace topo
             list_subject.Visibility = Visibility.Hidden;
             BFS_plan.Visibility = Visibility.Hidden;
             DFS_plan.Visibility = Visibility.Hidden;
+            Info_box.Visibility = Visibility.Visible;
         }
 
         private void list_subject_LostMouseCapture(object sender, MouseEventArgs e)
@@ -215,6 +230,7 @@ namespace topo
             list_subject.Visibility = Visibility.Hidden;
             BFS_plan.Visibility = Visibility.Hidden;
             DFS_plan.Visibility = Visibility.Hidden;
+            Info_box.Visibility = Visibility.Hidden;
         }
     }
 }

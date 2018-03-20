@@ -203,7 +203,7 @@ public class BFS{
             foreach(string temp in takenList){ //remove taken course
                 courses.Remove(temp);
             }
-
+            
             result.Add(i, takenList);
             i++;
         }
