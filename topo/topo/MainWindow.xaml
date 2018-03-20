@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:topo"
         mc:Ignorable="d"
-        Title="Topo" Height="433.2" Width="836.8" MaxWidth="1024" MaxHeight="720">
+        Title="Topo" Height="433.2" Width="836.8" MaxWidth="836.8" MaxHeight="433.2">
     <Grid HorizontalAlignment="Left" Height="406" Margin="0,0,0,-2" VerticalAlignment="Top" Width="827" Background="#FF0E0E11" MaxWidth="1024" MaxHeight="720">
         <Label x:Name="Toolbar" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="396" Width="63" Background="#FF1A1A25"/>
         <Image x:Name="module_import" Margin="7,26,773,317" Source="logo_1.png" Stretch="Fill" Height="63" Width="47" MouseLeftButtonDown="module_import_MouseLeftButtonDown" Opacity="0.8">
@@ -76,5 +76,7 @@
         <Label x:Name="HL05" Content="" HorizontalAlignment="Left" Height="63" Margin="0,319,0,0" VerticalAlignment="Top" Width="63" Background="#198496D4" Visibility="Hidden"/>
         <TextBox x:Name="list_subject" HorizontalAlignment="Left" Height="184" TextWrapping="Wrap" VerticalAlignment="Top" Width="618" Margin="152,193,0,0" HorizontalScrollBarVisibility="Auto" Background="#FF0F0F15" Foreground="#FFEBE1E1" BorderBrush="#00ABADB3" CaretBrush="Black" FontFamily="Bahnschrift Light" FontSize="15" Grid.Column="5" Grid.ColumnSpan="5" ScrollViewer.CanContentScroll="True" Visibility="Hidden" VerticalScrollBarVisibility="Visible"/>
         <TextBox x:Name="BFS_plan" HorizontalAlignment="Left" Height="184" TextWrapping="Wrap" VerticalAlignment="Top" Width="618" Margin="152,193,0,0" HorizontalScrollBarVisibility="Auto" Background="#FF0F0F15" Foreground="#FFEBE1E1" BorderBrush="#00ABADB3" CaretBrush="Black" FontFamily="Bahnschrift Light" FontSize="15" Grid.Column="5" Grid.ColumnSpan="5" ScrollViewer.CanContentScroll="True" Visibility="Hidden" VerticalScrollBarVisibility="Visible"/>
+        <TextBox x:Name="DFS_plan" HorizontalAlignment="Left" Height="184" TextWrapping="Wrap" VerticalAlignment="Top" Width="618" Margin="152,193,0,0" HorizontalScrollBarVisibility="Auto" Background="#FF0F0F15" Foreground="#FFEBE1E1" BorderBrush="#00ABADB3" CaretBrush="Black" FontFamily="Bahnschrift Light" FontSize="15" Grid.Column="5" Grid.ColumnSpan="5" ScrollViewer.CanContentScroll="True" Visibility="Hidden" VerticalScrollBarVisibility="Visible"/>
+
     </Grid>
 </Window>

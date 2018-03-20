@@ -20,6 +20,8 @@ namespace topo
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -56,6 +58,7 @@ namespace topo
 
             list_subject.Visibility = Visibility.Hidden;
             BFS_plan.Visibility = Visibility.Hidden;
+            DFS_plan.Visibility = Visibility.Hidden;
         }
 
         private void module_list_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -76,9 +79,10 @@ namespace topo
                 HL04.Visibility = Visibility.Hidden;
                 HL05.Visibility = Visibility.Hidden;
 
+                list_subject.Visibility = Visibility.Visible;
+
                 string filename = ListSubjectViewer.filename;
                 CoursePlan coursePlan = new CoursePlan(filename);
-                list_subject.Visibility = Visibility.Visible;
                 list_subject.Text = coursePlan.get_name_list();
 
             }
@@ -91,6 +95,7 @@ namespace topo
             }
 
             BFS_plan.Visibility = Visibility.Hidden;
+            DFS_plan.Visibility = Visibility.Hidden;
 
         }
 
@@ -123,6 +128,17 @@ namespace topo
             list_subject.Visibility = Visibility.Hidden;
             BFS_plan.Visibility = Visibility.Hidden;
 
+
+
+
+
+            string filename = ListSubjectViewer.filename;
+            CoursePlan coursePlan = new CoursePlan(filename);
+            DFS dfsResult = new DFS(coursePlan.subjects);
+            DFS_plan.Visibility = Visibility.Visible;
+            DFS_plan.Text = dfsResult.get_name_list();
+            
+
         }
 
         private void module_bfs_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -151,7 +167,10 @@ namespace topo
                 HL04.Visibility = Visibility.Hidden;
             }
 
+        
             list_subject.Visibility = Visibility.Hidden;
+            DFS_plan.Visibility = Visibility.Hidden;
+
             string filename = ListSubjectViewer.filename;
             CoursePlan coursePlan = new CoursePlan(filename);
             BFS bfsResult = new BFS(coursePlan.subjects);
@@ -188,11 +207,14 @@ namespace topo
 
             list_subject.Visibility = Visibility.Hidden;
             BFS_plan.Visibility = Visibility.Hidden;
+            DFS_plan.Visibility = Visibility.Hidden;
         }
 
         private void list_subject_LostMouseCapture(object sender, MouseEventArgs e)
         {
             list_subject.Visibility = Visibility.Hidden;
+            BFS_plan.Visibility = Visibility.Hidden;
+            DFS_plan.Visibility = Visibility.Hidden;
         }
     }
 }

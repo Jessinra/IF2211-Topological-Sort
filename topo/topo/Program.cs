@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Glee.Drawing;
+using System.Drawing;
 
 namespace topo
 {
@@ -14,16 +15,16 @@ namespace topo
         {
             //create a form
             System.Windows.Forms.Form form = new System.Windows.Forms.Form();
-
+            form.BackColor = System.Drawing.Color.Black;
+            form.Size = new System.Drawing.Size(1000, 600);
 
             //create a viewer object
             Microsoft.Glee.GraphViewerGdi.GViewer viewer = new Microsoft.Glee.GraphViewerGdi.GViewer();
 
             //create a graph object
             Microsoft.Glee.Drawing.Graph graph = new Microsoft.Glee.Drawing.Graph("graph");
+            graph.GraphAttr.Backgroundcolor = Microsoft.Glee.Drawing.Color.LavenderBlush;
 
-
-            
             //create the graph content
             CoursePlan coursePlan = new CoursePlan(filename);
             coursePlan.Print();
@@ -63,13 +64,16 @@ namespace topo
         {
             //create a form
             System.Windows.Forms.Form form = new System.Windows.Forms.Form();
-
+            form.Size = new System.Drawing.Size(1000, 600);
+            
             //create a viewer object
             Microsoft.Glee.GraphViewerGdi.GViewer viewer = new Microsoft.Glee.GraphViewerGdi.GViewer();
-
+            viewer.OutsideAreaBrush = Brushes.LightCoral;
+            
             //create a graph object
             Microsoft.Glee.Drawing.Graph graph = new Microsoft.Glee.Drawing.Graph("graph");
-            
+            graph.GraphAttr.Backgroundcolor = Microsoft.Glee.Drawing.Color.LightCoral;
+          
             //create the graph content
             CoursePlan coursePlan = new CoursePlan(filename);
             Subject tempSub = new Subject();
@@ -93,7 +97,44 @@ namespace topo
                     int index = convert.IndexOf(x) + 1;
                     graph.AddEdge(((i + 1).ToString() + ". " + convert[i]), (index.ToString() + ". " + x));
                 }
-                graph.AddEdge((i+1).ToString()+ ". " + convert[i], (i+2).ToString() + ". " + convert[i + 1]);
+            }
+            int j = 1;
+            foreach(KeyValuePair<int, List<string>> entry in bfsResult.result)
+            {
+                foreach (string tempp in entry.Value) {
+                    Microsoft.Glee.Drawing.Node n = graph.FindNode(j.ToString() + ". " + tempp);
+                    switch (entry.Key % 5)
+                    {
+                        case 1:
+                            {
+                                n.Attr.Fillcolor = Microsoft.Glee.Drawing.Color.MidnightBlue;
+                                n.Attr.Fontcolor = Microsoft.Glee.Drawing.Color.LavenderBlush;
+                                break;
+                            }
+                        case 2:
+                            {
+                                n.Attr.Fillcolor = Microsoft.Glee.Drawing.Color.MediumBlue;
+                                n.Attr.Fontcolor = Microsoft.Glee.Drawing.Color.LavenderBlush;
+                                break;
+                            }
+                        case 3:
+                            {
+                                n.Attr.Fillcolor = Microsoft.Glee.Drawing.Color.RoyalBlue;
+                                break;
+                            }
+                        case 4:
+                            {
+                                n.Attr.Fillcolor = Microsoft.Glee.Drawing.Color.DodgerBlue;
+                                break;
+                            }
+                        default:
+                            {
+                                n.Attr.Fillcolor = Microsoft.Glee.Drawing.Color.SkyBlue;
+                                break; 
+                            }
+                    }
+                    j++;
+                }
             }
 
             //bind the graph to the viewer
@@ -221,33 +262,46 @@ namespace topo
     public class DFS
     {
         List<string> courseTaken;
+        List<int> courseTaken_stamp;
 
         public DFS(Dictionary<string, Subject> subjects)
         {
             courseTaken = new List<string>();
 
+
             Sort(subjects, subjects["dummy"]);
 
             courseTaken.Reverse();
+            
 
             List<string> result = new List<string>();
+            List<int> result_stamp = new List<int>();
+
+            int i = courseTaken.Count;
             foreach (string element in courseTaken)
             {
+                
                 if (element != "dummy" && !result.Contains(element))
                 {
                     result.Add(element);
+                    result_stamp.Add(i);
+
                 }
+                i--;
             }
 
             courseTaken = result;
+            courseTaken_stamp = new List<int>();
+            courseTaken_stamp = result_stamp;
         }
-
+    
         public void Print()
         {
             Console.WriteLine("DFS");
-            foreach (string element in courseTaken)
+            for (int i = 0; i < courseTaken.Count; i++)
             {
-                Console.WriteLine(element);
+                Console.Write(courseTaken_stamp[i] + ": ");
+                Console.WriteLine(courseTaken[i]);
             }
         }
 
@@ -299,6 +353,20 @@ namespace topo
                 }
             }
             return false;
+        }
+
+        public string get_name_list()
+        {
+
+            string result_ = "Hasil DFS: \n\n";
+            
+            for (int i = 0; i < courseTaken.Count; i++)
+            { 
+                result_ = result_ + courseTaken_stamp[i] + ": " + courseTaken[i] + "\n";
+
+            }
+
+            return result_;
         }
     }
 
