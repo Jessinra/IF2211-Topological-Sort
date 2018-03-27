@@ -20,7 +20,6 @@ namespace topo
     /// </summary>
     public partial class MainWindow : Window
     {
-        
 
         public MainWindow()
         {
@@ -44,8 +43,7 @@ namespace topo
                 HL03.Visibility = Visibility.Hidden;
                 HL04.Visibility = Visibility.Hidden;
                 HL05.Visibility = Visibility.Hidden;
-                ListSubjectViewer.main();
-
+                
 
             }
             else if (page_input.IsVisible)
@@ -55,11 +53,14 @@ namespace topo
 
                 HL01.Visibility = Visibility.Hidden;
             }
+            ListSubjectViewer.main();
 
             list_subject.Visibility = Visibility.Hidden;
             BFS_plan.Visibility = Visibility.Hidden;
             DFS_plan.Visibility = Visibility.Hidden;
             Info_box.Visibility = Visibility.Hidden;
+            rtb_input.Visibility = Visibility.Visible;
+            enter_button1.Visibility = Visibility.Visible;
         }
 
         private void module_list_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -81,6 +82,7 @@ namespace topo
                 HL05.Visibility = Visibility.Hidden;
 
                 list_subject.Visibility = Visibility.Visible;
+                rtb_input.Visibility = Visibility.Hidden;
 
                 string filename = ListSubjectViewer.filename;
                 CoursePlan coursePlan = new CoursePlan(filename);
@@ -98,6 +100,7 @@ namespace topo
             BFS_plan.Visibility = Visibility.Hidden;
             DFS_plan.Visibility = Visibility.Hidden;
             Info_box.Visibility = Visibility.Hidden;
+            enter_button1.Visibility = Visibility.Hidden;
 
         }
 
@@ -130,10 +133,8 @@ namespace topo
             list_subject.Visibility = Visibility.Hidden;
             BFS_plan.Visibility = Visibility.Hidden;
             Info_box.Visibility = Visibility.Hidden;
-
-
-
-
+            rtb_input.Visibility = Visibility.Hidden;
+            enter_button1.Visibility = Visibility.Hidden;
 
             string filename = ListSubjectViewer.filename;
             CoursePlan coursePlan = new CoursePlan(filename);
@@ -174,6 +175,8 @@ namespace topo
             list_subject.Visibility = Visibility.Hidden;
             DFS_plan.Visibility = Visibility.Hidden;
             Info_box.Visibility = Visibility.Hidden;
+            rtb_input.Visibility = Visibility.Hidden;
+            enter_button1.Visibility = Visibility.Hidden;
 
             string filename = ListSubjectViewer.filename;
             CoursePlan coursePlan = new CoursePlan(filename);
@@ -223,6 +226,8 @@ namespace topo
             BFS_plan.Visibility = Visibility.Hidden;
             DFS_plan.Visibility = Visibility.Hidden;
             Info_box.Visibility = Visibility.Visible;
+            rtb_input.Visibility = Visibility.Hidden;
+            enter_button1.Visibility = Visibility.Hidden;
         }
 
         private void list_subject_LostMouseCapture(object sender, MouseEventArgs e)
@@ -231,6 +236,27 @@ namespace topo
             BFS_plan.Visibility = Visibility.Hidden;
             DFS_plan.Visibility = Visibility.Hidden;
             Info_box.Visibility = Visibility.Hidden;
+        }
+
+        private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        
+        private void EnterPressed(object sender, TouchEventArgs e)
+        {
+
+        }
+
+        private void click_pressed(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("halo");
+            TextRange textRange = new TextRange(rtb_input.Document.ContentStart, rtb_input.Document.ContentEnd);
+            string content = textRange.Text;
+            content = content.Replace("\r\n", "");
+            Console.WriteLine(content);
+            ListSubjectViewer.filename = content; BFSViewer.filename = content;
+            
         }
     }
 }

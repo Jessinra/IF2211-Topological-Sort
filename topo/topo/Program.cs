@@ -9,7 +9,7 @@ namespace topo
 {
     public class ListSubjectViewer
     {
-        public static string filename = "../../../../" + "Daftar Kuliah.txt";
+        public static string filename;
 
         public static void main()
         {
@@ -58,7 +58,7 @@ namespace topo
 
     public class BFSViewer
     {
-        public static string filename = "../../../../" + "Daftar Kuliah.txt";
+        public static string filename;// = "../../../../" + "Daftar Kuliah.txt";
 
         public static void main()
         {
